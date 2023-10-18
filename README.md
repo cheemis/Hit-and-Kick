@@ -1,2 +1,2 @@
 # Hit-and-Kick
- GPM 230
+ GPM 200
