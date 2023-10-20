@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
 
     //managing variables
-    private bool gameOver = false;
+    private bool playerCanMove = true;
 
 
     //movement variables
@@ -18,7 +19,6 @@ public class PlayerController : MonoBehaviour
 
 
     //hitting varaibles
-
     private bool hitting = false;
     public float hitTime = 2f;
 
@@ -30,7 +30,13 @@ public class PlayerController : MonoBehaviour
     private GameObject hurtBox;
 
 
-    //animation varaibles
+    //animation variables
+
+
+
+    //other entities variables
+    private LocationsManager locationsManager;
+    public GameObject gameOverText; // TEMP VARIABLE
 
 
     // Start is called before the first frame update
@@ -38,23 +44,38 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         hurtBox.SetActive(false);
+
+        locationsManager = GameObject.FindGameObjectWithTag("SpawningManager")?.GetComponent<LocationsManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!gameOver)
+        if(playerCanMove)
         {
             PlayerControls();
         }
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnEnable()
     {
-        if(collision.gameObject.tag == "Enemy")
+        KickingManager.onKickTV += OnKick;
+        KickingManager.onRecoverFromKick += OnRecoverFromKick;
+    }
+
+    private void OnDisable()
+    {
+        KickingManager.onKickTV -= OnKick;
+        KickingManager.onRecoverFromKick -= OnRecoverFromKick;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
         {
-            gameOver = true;
+            gameOverText.SetActive(true);
+            playerCanMove = false;
         }
     }
 
@@ -105,6 +126,27 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(HittingDuration());
         }
     }
+
+    private void OnKick()
+    {
+        //get a random spawn location
+        Vector3 spawnLocation = locationsManager == null ? Vector3.zero : locationsManager.GetRandomLocation();
+
+        //teleport player to new location
+        controller.enabled = false;
+        transform.position = new Vector3(spawnLocation.x, transform.position.y, spawnLocation.z);
+        controller.enabled = true;
+
+        //stop player from moving
+        playerCanMove = false;
+    }
+
+    private void OnRecoverFromKick()
+    {
+        playerCanMove = true;
+    }
+
+
 
     IEnumerator HittingDuration()
     {

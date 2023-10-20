@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 5695030489786178076}
   m_Layer: 0
   m_Name: Grunt Prefab
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,7 +133,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -161,7 +161,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df1cb770da692647a23f6deb5eb365f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeedRange: {x: 1.5, y: 2}
+  chaseSpeedRange: {x: 1.5, y: 4}
   playerTarget: {fileID: 0}
   enemyManager: {fileID: 0}
+  locationManager: {fileID: 0}

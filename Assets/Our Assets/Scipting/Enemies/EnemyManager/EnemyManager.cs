@@ -18,11 +18,18 @@ public class EnemyManager : MonoBehaviour
     public Vector3[] spawningRange = new Vector3[2]; //x is spawn side, y & z are the range in which they can spawn
 
 
+    //other entities variables
+    [SerializeField]
+    private LocationsManager locationManager;
+
+
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        locationManager = GameObject.FindGameObjectWithTag("SpawningManager")?.GetComponent<LocationsManager>();
+
         SpawnEnemies();
     }
 
@@ -45,14 +52,13 @@ public class EnemyManager : MonoBehaviour
         
         while (numEnemies < (int)maxEnemies)
         {
-            Debug.Log(numEnemies + " <? " + (int)maxEnemies);
             //choose a spawn location
             Vector3 spawnSide = spawningRange[Random.Range(0, spawningRange.Length)];
             Vector3 spawnPosition = new Vector3(spawnSide.x, 0, Random.Range(spawnSide.y, spawnSide.z));
 
             //instantiate new enemy and set components
             GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, enemyPrefab.transform.rotation);
-            newEnemy.GetComponent<Grunt>().InstantiateGrunt(this, playerTransform);
+            newEnemy.GetComponent<Grunt>().InstantiateGrunt(this, playerTransform, locationManager);
 
             //increase local counter for enemies in game
             numEnemies++;

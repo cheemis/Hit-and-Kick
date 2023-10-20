@@ -7,6 +7,13 @@ public class Grunt : MonoBehaviour
 {
     //This script manages the enemy that will try and kill the player
 
+
+    //managing self variables
+    private bool allowedToMove = true;
+    private bool alreadyPunched = false;
+    private Vector3 home;
+
+
     //movement variables
     private CharacterController controller;
     public Vector2 chaseSpeedRange;
@@ -17,12 +24,13 @@ public class Grunt : MonoBehaviour
     private Transform playerTarget;
 
 
-    //managing self variables
-    private bool alreadyPunched = false;
+    
 
 
     //other entities
     public EnemyManager enemyManager;
+    [SerializeField]
+    private LocationsManager locationManager; //this is passed from EnemyManager when instantiated
 
 
 
@@ -30,12 +38,29 @@ public class Grunt : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        home = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        GruntMovement();
+        if(allowedToMove)
+        {
+            GruntMovement();
+        }
+        
+    }
+
+    private void OnEnable()
+    {
+        KickingManager.onKickTV += OnKick;
+        KickingManager.onRecoverFromKick += OnRecoverFromKick;
+    }
+
+    private void OnDisable()
+    {
+        KickingManager.onKickTV -= OnKick;
+        KickingManager.onRecoverFromKick -= OnRecoverFromKick;
     }
 
 
@@ -58,11 +83,38 @@ public class Grunt : MonoBehaviour
 
 
 
-    public void InstantiateGrunt(EnemyManager enemyManager, Transform playerTransform)
+    public void InstantiateGrunt(EnemyManager enemyManager, Transform playerTransform, LocationsManager locationManager)
     {
+        Debug.Log("set location manager? " + (locationManager != null));
         this.enemyManager = enemyManager;
+        this.locationManager = locationManager;
+        
         playerTarget = playerTransform;
         chaseSpeed = Random.Range(chaseSpeedRange.x, chaseSpeedRange.y);
+    }
+
+
+    private void OnKick()
+    {
+        //get a random spawn location
+        Vector3 spawnLocation = locationManager == null ? Vector3.zero : locationManager.GetRandomLocation();
+
+
+        if (spawnLocation == Vector3.zero) spawnLocation = home;
+
+
+        //teleport player to new location
+        controller.enabled = false;
+        transform.position = new Vector3(spawnLocation.x, transform.position.y, spawnLocation.z);
+        controller.enabled = true;
+
+
+        allowedToMove = false;
+    }
+
+    private void OnRecoverFromKick()
+    {
+        allowedToMove = true;
     }
 
 
