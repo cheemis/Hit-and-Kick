@@ -58,7 +58,8 @@ public class EnemyManager : MonoBehaviour
 
             //instantiate new enemy and set components
             GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, enemyPrefab.transform.rotation);
-            newEnemy.GetComponent<Grunt>().InstantiateGrunt(this, playerTransform, locationManager);
+            int randomStandingLocation = Random.Range(0, playerTransform.childCount);
+            newEnemy.GetComponent<Grunt>().InstantiateGrunt(this, playerTransform, randomStandingLocation, locationManager);
 
             //increase local counter for enemies in game
             numEnemies++;
