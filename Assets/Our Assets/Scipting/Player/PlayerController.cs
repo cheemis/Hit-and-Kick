@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+//using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,7 +21,9 @@ public class PlayerController : MonoBehaviour
 
     //hitting varaibles
     private bool hitting = false;
+    private bool kicking = false;
     public float hitTime = 2f;
+    public float kickTime = 2f;
 
 
     //visual variables
@@ -85,8 +88,10 @@ public class PlayerController : MonoBehaviour
         //check to see if the player threw a punch
         Hit();
 
+        Kick();
+
         //if the player is not punching, then allow them to move
-        if(!hitting)
+        if(!hitting && !kicking)
         {
             MoveHero();
             TurnHero(Input.GetKey(KeyCode.D), Input.GetKey(KeyCode.A));
@@ -121,9 +126,17 @@ public class PlayerController : MonoBehaviour
 
     private void Hit()
     {
-        if(!hitting && Input.GetKeyDown(KeyCode.Space))
+        if(!hitting && Input.GetKeyDown(KeyCode.Comma))
         {
             StartCoroutine(HittingDuration());
+        }
+    }
+
+    private void Kick()
+    {
+        if (!kicking && Input.GetKeyDown(KeyCode.Period))
+        {
+            StartCoroutine(KickingDuration());
         }
     }
 
@@ -155,5 +168,17 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(hitTime);
         hurtBox.SetActive(false);
         hitting = false;
+    }
+
+    IEnumerator KickingDuration()
+    {
+        kicking = true;
+        Vector3 oldPosition = hurtBox.transform.localPosition;
+        hurtBox.transform.localPosition = new Vector3(1.573f, -0.5f, 0);  //hardcode
+        hurtBox.SetActive(true);
+        yield return new WaitForSeconds(kickTime);
+        hurtBox.SetActive(false);
+        hurtBox.transform.localPosition = oldPosition;
+        kicking = false;
     }
 }
