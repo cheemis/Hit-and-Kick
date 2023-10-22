@@ -30,8 +30,15 @@ public class Grunt : MonoBehaviour
 
     [Space(20)]
 
-    //movement variables
+    //component variables
     private CharacterController controller;
+    private Animator anim;
+
+
+
+    [Space(20)]
+
+    //movement variables
     public Vector2 chaseSpeedRange;
     private float chaseSpeed = 1f;
 
@@ -60,6 +67,14 @@ public class Grunt : MonoBehaviour
 
     [Space(20)]
 
+    //Dying Variables
+    [SerializeField]
+    private float timeToDeath = 2f;
+    private float deathTime = 0;
+
+
+    [Space(20)]
+
     //targetting player variables
     [SerializeField]
     private Transform playerTargetParent;
@@ -80,6 +95,7 @@ public class Grunt : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
         home = transform.position;
         punchingHitbox.SetActive(false);
     }
@@ -136,6 +152,7 @@ public class Grunt : MonoBehaviour
             case enemyState.gettingUp: //the enemy is getting up after the TV was kicked
                 break;
             case enemyState.dying: //The enemy was kicked by the player
+                Dying();
                 break;
             default:
                 break;
@@ -207,6 +224,14 @@ public class Grunt : MonoBehaviour
         }
     }
 
+    private void Dying()
+    {
+        if (Time.time > deathTime)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 
 
     public void InstantiateGrunt(EnemyManager enemyManager, Transform playerTransform, int playerTransformChild, LocationsManager locationManager)
@@ -248,15 +273,19 @@ public class Grunt : MonoBehaviour
     }
 
 
-    private void Death()
+    private void Death() //called from player controller (I think)
     {
         alreadyPunched = true;
+
+        anim.SetTrigger("death");
+
+        deathTime = Time.time + timeToDeath;
+
+        currentState = enemyState.dying;
 
         if (enemyManager != null)
         {
             enemyManager.DespawnEnemy();
         }
-
-        Destroy(this.gameObject); //for some reason, this doesnt delete the colider right away, so "alreadyPunched" is needed
     }
 }

@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2771622792713867081}
   m_Layer: 0
-  m_Name: Sprite/Model
+  m_Name: Sprite-Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 9034971985756411103}
   - component: {fileID: 3503648810754951064}
   - component: {fileID: 5695030489786178076}
+  - component: {fileID: 5858831916769365883}
   m_Layer: 0
   m_Name: Grunt Prefab
   m_TagString: Untagged
@@ -325,9 +326,31 @@ MonoBehaviour:
   timeToPunchPlayer: 0.125
   punchingHitbox: {fileID: 8775541667420171315}
   idleTimeRange: {x: 0.5, y: 2}
+  timeToDeath: 1
   playerTargetParent: {fileID: 0}
   enemyManager: {fileID: 0}
   locationManager: {fileID: 0}
+--- !u!95 &5858831916769365883
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8936399886912459502}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b324b48e7ad8bc4a8e98198e21e1512, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9162352003979252417
 GameObject:
   m_ObjectHideFlags: 0
