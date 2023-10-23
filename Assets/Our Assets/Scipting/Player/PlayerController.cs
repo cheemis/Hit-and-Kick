@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-//using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -165,7 +164,25 @@ public class PlayerController : MonoBehaviour
     {
         hitting = true;
         hurtBox.SetActive(true);
+
+        /*
+        //Adding a raycaset to detect the first 3 enermies.
+        int enermyLayer = 7;
+        RaycastHit[] hits = Physics.SphereCastAll(heroTransform.position, 5, transform.forward, 1.573f, enermyLayer);
+        foreach (var hit in hits)
+        {
+            if (hit.collider.gameObject.layer == enermyLayer)
+            {
+                Debug.Log(hit.collider.gameObject.name);
+            }            
+        }
+        */
+
+        HurtBox box = hurtBox.GetComponent<HurtBox>();
+        box.hitCounter = 2;
+        box.activate = true;
         yield return new WaitForSeconds(hitTime);
+        box.activate = false;
         hurtBox.SetActive(false);
         hitting = false;
     }

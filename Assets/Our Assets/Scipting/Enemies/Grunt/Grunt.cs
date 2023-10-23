@@ -125,10 +125,11 @@ public class Grunt : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "HurtBox" && !alreadyPunched)
-        {
-            Death();
-        }
+        //comment this, move logic into hurtbox
+        //if (other.gameObject.tag == "HurtBox" && !alreadyPunched)
+        //{
+        //    Death();
+        //}
     }
 
     private void CurrentEnemyState()
@@ -273,7 +274,7 @@ public class Grunt : MonoBehaviour
     }
 
 
-    private void Death() //called from player controller (I think)
+    public void Death() //called from player controller (I think)
     {
         alreadyPunched = true;
 
@@ -287,5 +288,10 @@ public class Grunt : MonoBehaviour
         {
             enemyManager.DespawnEnemy();
         }
+    }
+
+    public bool isAlreadyPunched()
+    {
+        return alreadyPunched;
     }
 }
