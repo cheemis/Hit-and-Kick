@@ -193,7 +193,11 @@ public class PlayerController : MonoBehaviour
         Vector3 oldPosition = hurtBox.transform.localPosition;
         hurtBox.transform.localPosition = new Vector3(1.573f, -0.5f, 0);  //hardcode
         hurtBox.SetActive(true);
+        HurtBox box = hurtBox.GetComponent<HurtBox>();
+        box.hitCounter = 2;
+        box.activate = true;
         yield return new WaitForSeconds(kickTime);
+        box.activate = false;
         hurtBox.SetActive(false);
         hurtBox.transform.localPosition = oldPosition;
         kicking = false;
