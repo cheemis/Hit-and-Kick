@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,12 +18,23 @@ public class PlayerController : MonoBehaviour
     public float horizontalSpeed = 10f;
     public float verticalSpeed = 5f;
 
+    public enum playerAction
+    {
+        noAction,
+        hit,
+        kick,
+    }
+
+    playerAction[] actionList = new playerAction[3];
+
 
     //hitting varaibles
     private bool hitting = false;
     private bool kicking = false;
     public float hitTime = 2f;
     public float kickTime = 2f;
+
+    private bool actioned = false;
 
     //hurtbox variables
     [SerializeField]
@@ -94,6 +106,7 @@ public class PlayerController : MonoBehaviour
         Kick();
 
         //if the player is not punching, then allow them to move
+        // Tom thoughts: we may need to release this constraint once we want to run-hit
         if(!hitting && !kicking)
         {
             MoveHero();
@@ -129,6 +142,10 @@ public class PlayerController : MonoBehaviour
 
     private void Hit()
     {
+        if (actioned)
+        {
+            return;
+        }
         if(!hitting && Input.GetKeyDown(KeyCode.Comma))
         {
             StartCoroutine(HittingDuration());
@@ -137,6 +154,10 @@ public class PlayerController : MonoBehaviour
 
     private void Kick()
     {
+        if (actioned)
+        {
+            return;
+        }
         if (!kicking && Input.GetKeyDown(KeyCode.Period))
         {
             StartCoroutine(KickingDuration());
@@ -166,7 +187,15 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator HittingDuration()
     {
+        actioned = true;
         hitting = true;
+        
+        for (int i = 0; i < actionList.Length - 1; i++)
+        {
+            actionList[i] = actionList[i + 1];
+        }
+        actionList[actionList.Length - 1] = playerAction.hit;
+
         hurtBox.SetActive(true);
 
         /*
@@ -189,11 +218,36 @@ public class PlayerController : MonoBehaviour
         //box.activate = false;
         hurtBox.SetActive(false);
         hitting = false;
+        actioned = false;
     }
 
     IEnumerator KickingDuration()
     {
+        actioned = true;
         kicking = true;
+        
+        for (int i = 0; i < actionList.Length - 1; i++)
+        {
+            actionList[i] = actionList[i + 1];
+        }
+        actionList[actionList.Length - 1] = playerAction.kick;
+
+
+        Vector3 oldSize = hurtBox.transform.localScale;
+
+
+        if (actionList[0] == playerAction.kick && actionList[1] == playerAction.hit && actionList[2] == playerAction.kick)
+        {
+            // make a combo here, so let kick become a big kick.
+            float x = hurtBox.transform.localScale.x;
+            float y = hurtBox.transform.localScale.y;
+            float z = hurtBox.transform.localScale.z;
+            hurtBox.transform.localScale = new Vector3(2 * x,2 * y,2 * z);
+            //clear the list
+            actionList[0] = actionList[1] = actionList[2] = playerAction.noAction;
+
+        }
+
         Vector3 oldPosition = hurtBox.transform.localPosition;
         hurtBox.transform.localPosition = new Vector3(1.573f, -0.5f, 0);  //hardcode
         hurtBox.SetActive(true);
@@ -204,6 +258,8 @@ public class PlayerController : MonoBehaviour
         //box.activate = false;
         hurtBox.SetActive(false);
         hurtBox.transform.localPosition = oldPosition;
+        hurtBox.transform.localScale = oldSize;
         kicking = false;
+        actioned = false;
     }
 }
