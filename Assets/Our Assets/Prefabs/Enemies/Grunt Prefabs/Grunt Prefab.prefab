@@ -326,7 +326,10 @@ MonoBehaviour:
   timeToPunchPlayer: 0.125
   punchingHitbox: {fileID: 8775541667420171315}
   idleTimeRange: {x: 0.5, y: 2}
+  health: 2
   timeToDeath: 1
+  knockbackForce: 10
+  knockbackDecceleration: 10
   playerTargetParent: {fileID: 0}
   enemyManager: {fileID: 0}
   locationManager: {fileID: 0}

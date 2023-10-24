@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     public float hitTime = 2f;
     public float kickTime = 2f;
 
+    //hurtbox variables
+    [SerializeField]
+    private HurtBox punchingHurtBox;
+
 
     //visual variables
     [SerializeField]
@@ -178,11 +182,11 @@ public class PlayerController : MonoBehaviour
         }
         */
 
-        HurtBox box = hurtBox.GetComponent<HurtBox>();
+        HurtBox box = hurtBox.GetComponent<HurtBox>(); // "side note, get this as a global in start method" - Nick
         box.hitCounter = 2;
-        box.activate = true;
+        //box.activate = true;
         yield return new WaitForSeconds(hitTime);
-        box.activate = false;
+        //box.activate = false;
         hurtBox.SetActive(false);
         hitting = false;
     }
@@ -195,9 +199,9 @@ public class PlayerController : MonoBehaviour
         hurtBox.SetActive(true);
         HurtBox box = hurtBox.GetComponent<HurtBox>();
         box.hitCounter = 2;
-        box.activate = true;
+        //box.activate = true;
         yield return new WaitForSeconds(kickTime);
-        box.activate = false;
+        //box.activate = false;
         hurtBox.SetActive(false);
         hurtBox.transform.localPosition = oldPosition;
         kicking = false;

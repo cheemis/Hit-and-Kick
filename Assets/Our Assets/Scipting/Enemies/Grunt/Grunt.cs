@@ -12,7 +12,6 @@ public class Grunt : MonoBehaviour
 
     //managing self variables
     private bool allowedToMove = true;
-    private bool alreadyPunched = false;
     private Vector3 home;
 
     public enum enemyState
@@ -23,7 +22,8 @@ public class Grunt : MonoBehaviour
         waitingUpToPunch,
         punching,
         gettingUp,
-        dying
+        dying,
+        knockedBack
     }
     [SerializeField]
     private enemyState currentState = enemyState.walking;
@@ -69,8 +69,22 @@ public class Grunt : MonoBehaviour
 
     //Dying Variables
     [SerializeField]
+    private int health = 1;
+    [SerializeField]
     private float timeToDeath = 2f;
     private float deathTime = 0;
+    private bool alreadyHit = false;
+
+    [Space(20)]
+
+    //knocked back variables
+    [SerializeField]
+    private Vector2 knockbackForce = new Vector2(5,10);
+    [SerializeField]
+    private float knockbackDecceleration = 10f;
+    private float currentForce = 0;
+    private Vector3 knockbackDirection = Vector3.zero;
+
 
 
     [Space(20)]
@@ -122,16 +136,6 @@ public class Grunt : MonoBehaviour
         KickingManager.onRecoverFromKick -= OnRecoverFromKick;
     }
 
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //comment this, move logic into hurtbox
-        //if (other.gameObject.tag == "HurtBox" && !alreadyPunched)
-        //{
-        //    Death();
-        //}
-    }
-
     private void CurrentEnemyState()
     {
         switch (currentState)
@@ -154,6 +158,9 @@ public class Grunt : MonoBehaviour
                 break;
             case enemyState.dying: //The enemy was kicked by the player
                 Dying();
+                break;
+            case enemyState.knockedBack: //the enemy getting pushed back
+                knockedBack();
                 break;
             default:
                 break;
@@ -233,6 +240,37 @@ public class Grunt : MonoBehaviour
         }
     }
 
+    private void knockedBack()
+    {
+        controller.Move(knockbackDirection * currentForce * Time.deltaTime);
+
+        currentForce -= knockbackDecceleration * Time.deltaTime;
+
+        if(currentForce <= 0) //idle after push back
+        {
+            //stop being knocked back
+            alreadyHit = false;
+            currentState = enemyState.idle;
+            idleTime = Time.time + Random.Range(idleTimeRange.x, idleTimeRange.y);
+
+
+            //if dead, delete enemy
+            if (health <= 0)
+            {
+                anim.SetTrigger("death");
+
+                deathTime = Time.time + timeToDeath;
+
+                currentState = enemyState.dying;
+
+                if (enemyManager != null)
+                {
+                    enemyManager.DespawnEnemy();
+                }
+            }
+        }
+    }
+
 
 
     public void InstantiateGrunt(EnemyManager enemyManager, Transform playerTransform, int playerTransformChild, LocationsManager locationManager)
@@ -274,24 +312,27 @@ public class Grunt : MonoBehaviour
     }
 
 
-    public void Death() //called from player controller (I think)
+    public void Death() //called from player controller (I think) -- needs to be renamed
     {
-        alreadyPunched = true;
 
-        anim.SetTrigger("death");
+        if (alreadyHit) return; //base case
+        alreadyHit = true;
 
-        deathTime = Time.time + timeToDeath;
+        Debug.Log("hit!");
+        health--;
 
-        currentState = enemyState.dying;
+        //knock back enemy
+        knockbackDirection = (transform.position - playerTargetParent.position);
+        knockbackDirection.y = 0;
+        knockbackDirection.Normalize();
 
-        if (enemyManager != null)
-        {
-            enemyManager.DespawnEnemy();
-        }
+        currentForce = Random.Range(knockbackForce.x, knockbackForce.y);
+        currentState = enemyState.knockedBack;
     }
 
-    public bool isAlreadyPunched()
+    public bool isAlreadyPunched() //this needs to be changed in name, its now determines death
     {
-        return alreadyPunched;
+
+        return health <= 0;
     }
 }

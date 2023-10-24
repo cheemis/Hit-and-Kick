@@ -5,14 +5,14 @@ using UnityEngine;
 public class HurtBox : MonoBehaviour
 {
 
-    public bool activate;
+    //public bool activate; // -- "you dont need this, just use gameObject.activeSelf
     public int hitCounter;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        activate = true;
+        //activate = true;
         hitCounter = 2;
     }
 
@@ -25,7 +25,7 @@ public class HurtBox : MonoBehaviour
     //used to detect the enermies
     private void OnTriggerEnter(Collider other)
     {
-        if (!activate)
+        if (!/*activate*/gameObject.activeSelf) //this is redundant
         {
             return;
         }
