@@ -85,6 +85,13 @@ public class Grunt : MonoBehaviour
     private float currentForce = 0;
     private Vector3 knockbackDirection = Vector3.zero;
 
+    [Space(20)]
+    //audio variables
+    [SerializeField]
+    private AudioClip[] punchSfx;
+    [SerializeField]
+    private AudioSource punchAudioSource;
+    
 
 
     [Space(20)]
@@ -206,7 +213,12 @@ public class Grunt : MonoBehaviour
         if(Time.time > hitTime)
         {
             currentState = enemyState.punching;
+            anim.SetInteger("locoMotionState", 1);
             punchTime = Time.time + timeToPunchPlayer;
+
+            punchAudioSource.clip = punchSfx[Random.Range(0, punchSfx.Length)];
+            Debug.Log(punchAudioSource.clip);
+
             punchingHitbox.SetActive(true);
         }
     }
@@ -216,6 +228,7 @@ public class Grunt : MonoBehaviour
         if (Time.time > punchTime)
         {
             currentState = enemyState.idle;
+            anim.SetInteger("locoMotionState", 0);
             punchingHitbox.SetActive(false);
             idleTime = Time.time + Random.Range(idleTimeRange.x, idleTimeRange.y);
         }

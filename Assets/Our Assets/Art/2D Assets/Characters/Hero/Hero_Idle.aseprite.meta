@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 084035884ec3e464d91f03586b2d294b
+guid: d8fabb1db3459714a9dc1a78088fd21a
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,7 +119,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Player_Idle
+  - name: Hero_Idle_Frame_0
     originalName: 
     pivot: {x: 0.48333335, y: -0.32500002}
     alignment: 9
@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 4
       width: 60
       height: 40
-    spriteID: 278c2e7d8e17fb1499824e8fe77e13f6
+    spriteID: ac917af642f00ab428a73aaa54a6486c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -139,23 +139,79 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: Hero_Idle_Frame_1
+    originalName: 
+    pivot: {x: 0.47457626, y: -0.32500002}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 52
+      width: 59
+      height: 40
+    spriteID: d2c95015c3075bf48b407d15ecccf05b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 52}
+  - name: Hero_Idle_Frame_2
+    originalName: 
+    pivot: {x: 0.46551725, y: -0.33333334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 100
+      width: 58
+      height: 39
+    spriteID: ca6fbceaf1421594f98bff446cabd215
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 100}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1634684586
-    name: Player_Idle
+    guid: 1504599735
+    name: Hero_Idle
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Player_Idle
+    - name: Hero_Idle_Frame_0
       frameIndex: 0
       cellRect:
         x: 3
         y: 13
         width: 60
         height: 40
-      spriteId: 278c2e7d8e17fb1499824e8fe77e13f6
+      spriteId: ac917af642f00ab428a73aaa54a6486c
+    - name: Hero_Idle_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 4
+        y: 13
+        width: 59
+        height: 40
+      spriteId: d2c95015c3075bf48b407d15ecccf05b
+    - name: Hero_Idle_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 5
+        y: 13
+        width: 58
+        height: 39
+      spriteId: ca6fbceaf1421594f98bff446cabd215
     linkedCells: []
     parentIndex: -1
   platformSettings: []
