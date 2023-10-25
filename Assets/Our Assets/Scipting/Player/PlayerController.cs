@@ -18,6 +18,17 @@ public class PlayerController : MonoBehaviour
     public float horizontalSpeed = 10f;
     public float verticalSpeed = 5f;
 
+    [Space(20)]
+    //audio variables
+    [SerializeField]
+    private AudioClip[] punchSfx;
+    [SerializeField]
+    private AudioSource punchAudioSource;
+    [SerializeField]
+    private AudioSource kickAudioSource;
+    [SerializeField]
+    private AudioSource kickComputer;
+
     public enum playerAction
     {
         noAction,
@@ -124,7 +135,7 @@ public class PlayerController : MonoBehaviour
         float rightwardSpeed = ((Input.GetKey(KeyCode.D) ? 1 : 0) +
                                (Input.GetKey(KeyCode.A) ? -1 : 0)) *
                                horizontalSpeed * Time.deltaTime;
-
+        //audio 
         controller.Move(new Vector3(rightwardSpeed, 0, upwardSpeed));
     }
 
@@ -173,7 +184,8 @@ public class PlayerController : MonoBehaviour
         controller.enabled = false;
         transform.position = new Vector3(spawnLocation.x, transform.position.y, spawnLocation.z);
         controller.enabled = true;
-
+        //audio
+        kickComputer.Play();
         //stop player from moving
         playerCanMove = false;
     }
@@ -214,6 +226,9 @@ public class PlayerController : MonoBehaviour
         HurtBox box = hurtBox.GetComponent<HurtBox>(); // "side note, get this as a global in start method" - Nick
         box.hitCounter = 2;
         //box.activate = true;
+        //audio
+        punchAudioSource.clip = punchSfx[Random.Range(0, punchSfx.Length)];
+
         yield return new WaitForSeconds(hitTime);
         //box.activate = false;
         hurtBox.SetActive(false);
@@ -254,6 +269,8 @@ public class PlayerController : MonoBehaviour
         HurtBox box = hurtBox.GetComponent<HurtBox>();
         box.hitCounter = 2;
         //box.activate = true;
+        //audio
+        punchAudioSource.clip = punchSfx[Random.Range(0, punchSfx.Length)];
         yield return new WaitForSeconds(kickTime);
         //box.activate = false;
         hurtBox.SetActive(false);
