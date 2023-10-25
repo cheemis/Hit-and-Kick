@@ -228,6 +228,7 @@ public class PlayerController : MonoBehaviour
         //box.activate = true;
         //audio
         punchAudioSource.clip = punchSfx[Random.Range(0, punchSfx.Length)];
+        punchAudioSource.Play();
 
         yield return new WaitForSeconds(hitTime);
         //box.activate = false;
@@ -270,7 +271,8 @@ public class PlayerController : MonoBehaviour
         box.hitCounter = 2;
         //box.activate = true;
         //audio
-        punchAudioSource.clip = punchSfx[Random.Range(0, punchSfx.Length)];
+        kickAudioSource.clip = punchSfx[Random.Range(0, punchSfx.Length)];
+        kickAudioSource.Play();
         yield return new WaitForSeconds(kickTime);
         //box.activate = false;
         hurtBox.SetActive(false);
