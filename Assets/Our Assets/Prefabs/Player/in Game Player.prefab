@@ -317,9 +317,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d5388ca178892ec4cba818b4778962bd, type: 3}
   - {fileID: 8300000, guid: 645265e02271dab4c95c12260ca084f2, type: 3}
   - {fileID: 8300000, guid: 12194b0be9f380c44970cd74f3377b7b, type: 3}
-  punchAudioSource: {fileID: 7300122617480430647}
-  kickAudioSource: {fileID: 7300122617480430647}
+  - {fileID: 8300000, guid: acc23338d691daf4d96994f2136461cf, type: 3}
+  - {fileID: 8300000, guid: cb335bda9e84fcc438be22bcbbabd7f9, type: 3}
+  - {fileID: 8300000, guid: 2b0e33d72d690b04a96a8268e34711a8, type: 3}
+  - {fileID: 8300000, guid: ede9446c8d0d52346a955e109d6180b4, type: 3}
+  - {fileID: 8300000, guid: 4b847303d9bdef348ae52508c62f6a68, type: 3}
+  - {fileID: 8300000, guid: 40532168bf658964985ca5e6dc46a9f3, type: 3}
+  fightAudioSource: {fileID: 7300122617480430647}
   kickComputer: {fileID: 5041301915292210421}
+  gameOver: {fileID: 0}
   hitTime: 0.25
   kickTime: 0.25
   punchingHurtBox: {fileID: 0}
@@ -385,7 +391,7 @@ AudioSource:
   m_GameObject: {fileID: 5731438483829945687}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8431484428919773636, guid: 135a9550b44f7eb4e88d6ee7bcc252aa, type: 2}
   m_audioClip: {fileID: 8300000, guid: 9df99b2a83f746c43abb07dad2ee7d05, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -593,6 +599,7 @@ GameObject:
   - component: {fileID: 444913259471303847}
   - component: {fileID: 7300122617480430647}
   - component: {fileID: 7141980845507258697}
+  - component: {fileID: 4473618711988781829}
   m_Layer: 0
   m_Name: HurtBox
   m_TagString: HurtBox
@@ -735,7 +742,7 @@ AudioSource:
   m_GameObject: {fileID: 7390051495255776028}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 8431484428919773636, guid: 135a9550b44f7eb4e88d6ee7bcc252aa, type: 2}
+  OutputAudioMixerGroup: {fileID: -6431512509100935143, guid: 135a9550b44f7eb4e88d6ee7bcc252aa, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -823,6 +830,19 @@ AudioSource:
     m_PostInfinity: 2
     m_RotationOrder: 4
 --- !u!114 &7141980845507258697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7390051495255776028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff50e7a10a91494ea97366c98a352eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitCounter: 0
+--- !u!114 &4473618711988781829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
