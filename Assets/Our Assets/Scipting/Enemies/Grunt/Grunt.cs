@@ -213,6 +213,7 @@ public class Grunt : MonoBehaviour
         if(Time.time > hitTime)
         {
             currentState = enemyState.punching;
+            anim.SetInteger("locoMotionState", 1);
             punchTime = Time.time + timeToPunchPlayer;
 
             punchAudioSource.clip = punchSfx[Random.Range(0, punchSfx.Length)];
@@ -227,6 +228,7 @@ public class Grunt : MonoBehaviour
         if (Time.time > punchTime)
         {
             currentState = enemyState.idle;
+            anim.SetInteger("locoMotionState", 0);
             punchingHitbox.SetActive(false);
             idleTime = Time.time + Random.Range(idleTimeRange.x, idleTimeRange.y);
         }
