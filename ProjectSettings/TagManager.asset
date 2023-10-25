@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - SpawningManager
   - EnemyBody
+  - InGameCamera
   layers:
   - Default
   - TransparentFX
