@@ -8,8 +8,8 @@ using static UnityEngine.GraphicsBuffer;
 public class Grunt : MonoBehaviour
 {
     //This script manages the enemy that will try and kill the player
-
-
+    //hurtaudiocount
+     static bool hurtAudio = true;
     //managing self variables
     private bool allowedToMove = true;
     private Vector3 home;
@@ -91,7 +91,11 @@ public class Grunt : MonoBehaviour
     private AudioClip[] punchSfx;
     [SerializeField]
     private AudioSource punchAudioSource;
-    
+    [SerializeField]
+    private AudioClip[] hurthSfx;
+    [SerializeField]
+    private AudioSource hurtAudioSource;
+
 
 
     [Space(20)]
@@ -217,7 +221,7 @@ public class Grunt : MonoBehaviour
             punchTime = Time.time + timeToPunchPlayer;
 
             punchAudioSource.clip = punchSfx[Random.Range(0, punchSfx.Length)];
-            Debug.Log(punchAudioSource.clip);
+            //Debug.Log(punchAudioSource.clip);
 
             punchingHitbox.SetActive(true);
         }
@@ -255,18 +259,27 @@ public class Grunt : MonoBehaviour
 
     private void knockedBack()
     {
+        
         controller.Move(knockbackDirection * currentForce * Time.deltaTime);
 
         currentForce -= knockbackDecceleration * Time.deltaTime;
+        if (hurtAudio)
+        {
+            hurtAudio = false;
+            hurtAudioSource.clip = hurthSfx[Random.Range(0, 3)];
+            hurtAudioSource.Play();
+            
+        }
+       
 
-        if(currentForce <= 0) //idle after push back
+        if (currentForce <= 0) //idle after push back
         {
             //stop being knocked back
             alreadyHit = false;
             currentState = enemyState.idle;
             idleTime = Time.time + Random.Range(idleTimeRange.x, idleTimeRange.y);
 
-
+            hurtAudio = true;
             //if dead, delete enemy
             if (health <= 0)
             {
@@ -275,6 +288,8 @@ public class Grunt : MonoBehaviour
                 deathTime = Time.time + timeToDeath;
 
                 currentState = enemyState.dying;
+                hurtAudioSource.clip = hurthSfx[Random.Range(4, 6)];
+                hurtAudioSource.Play();
 
                 if (enemyManager != null)
                 {

@@ -23,11 +23,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AudioClip[] punchSfx;
     [SerializeField]
-    private AudioSource punchAudioSource;
-    [SerializeField]
-    private AudioSource kickAudioSource;
+    private AudioSource fightAudioSource;
     [SerializeField]
     private AudioSource kickComputer;
+    [SerializeField]
+    private AudioSource gameOver;
 
     public enum playerAction
     {
@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
+            gameOver.Play();
             gameOverText.SetActive(true);
             playerCanMove = false;
         }
@@ -227,8 +228,8 @@ public class PlayerController : MonoBehaviour
         box.hitCounter = 2;
         //box.activate = true;
         //audio
-        punchAudioSource.clip = punchSfx[Random.Range(0, punchSfx.Length)];
-        punchAudioSource.Play();
+        fightAudioSource.clip = punchSfx[Random.Range(0, 2)];
+        fightAudioSource.Play();
 
         yield return new WaitForSeconds(hitTime);
         //box.activate = false;
@@ -251,7 +252,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 oldSize = hurtBox.transform.localScale;
 
-
+        bool combo = false;
         if (actionList[0] == playerAction.kick && actionList[1] == playerAction.hit && actionList[2] == playerAction.kick)
         {
             // make a combo here, so let kick become a big kick.
@@ -261,7 +262,7 @@ public class PlayerController : MonoBehaviour
             hurtBox.transform.localScale = new Vector3(2 * x,2 * y,2 * z);
             //clear the list
             actionList[0] = actionList[1] = actionList[2] = playerAction.noAction;
-
+            combo= true;
         }
 
         Vector3 oldPosition = hurtBox.transform.localPosition;
@@ -271,8 +272,18 @@ public class PlayerController : MonoBehaviour
         box.hitCounter = 2;
         //box.activate = true;
         //audio
-        kickAudioSource.clip = punchSfx[Random.Range(0, punchSfx.Length)];
-        kickAudioSource.Play();
+        if (combo)
+        {
+            fightAudioSource.clip = punchSfx[Random.Range(6, 8)];
+            fightAudioSource.Play();
+        }
+        else
+        {
+            fightAudioSource.clip = punchSfx[Random.Range(3, 5)];
+            fightAudioSource.Play();
+        }
+
+
         yield return new WaitForSeconds(kickTime);
         //box.activate = false;
         hurtBox.SetActive(false);

@@ -33,10 +33,17 @@ public class KickingManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textmesh;
 
+    //Audio
+    [SerializeField]
+    private AudioSource kickHero;
+    [SerializeField]
+    private AudioSource gameOver;
+
 
     //other entities variables
     private LocationsManager locationsManager;
     public GameObject gameOverText; // TEMP VARIABLE
+
 
 
     // Start is called before the first frame update
@@ -54,8 +61,10 @@ public class KickingManager : MonoBehaviour
     {
         if(!kicking && Input.GetKeyDown(KeyCode.K))
         {
+
             locationsManager.ResetLocations();
             onKickTV.Invoke();
+            kickHero.Play();
         }
 
         if(Input.GetKeyDown(KeyCode.R))
@@ -111,7 +120,9 @@ public class KickingManager : MonoBehaviour
         }
         else
         {
+            gameOver.Play();
             gameOverText.SetActive(true);
+            
         }
 
         foot.SetActive(false);
