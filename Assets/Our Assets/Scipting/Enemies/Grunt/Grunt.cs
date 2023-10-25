@@ -334,5 +334,10 @@ public class Grunt : MonoBehaviour
     {
 
         return health <= 0;
+
+        //AudioSource a = new AudioSource();
+        //a.pitch = Random.Range(.8f, 1.2f);
     }
+
+
 }
