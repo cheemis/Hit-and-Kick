@@ -535,6 +535,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 244140590768288905, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
+      propertyPath: isGlobal
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3338107414310317813, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
       propertyPath: mainMusic
       value: 
@@ -582,6 +586,10 @@ PrefabInstance:
     - target: {fileID: 6869141716491060816, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6999007782985534463, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7502099047853494743, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
       propertyPath: m_Name
