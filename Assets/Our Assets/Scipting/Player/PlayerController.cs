@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     //managing variables
     private bool playerCanMove = true;
 
+    private Animator anim;
+
 
     //movement variables
     private CharacterController controller;
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         hurtBox.SetActive(false);
-
+        anim = GetComponent<Animator>();
         locationsManager = GameObject.FindGameObjectWithTag("SpawningManager")?.GetComponent<LocationsManager>();
     }
 
@@ -230,6 +232,8 @@ public class PlayerController : MonoBehaviour
         //audio
         fightAudioSource.clip = punchSfx[Random.Range(0, 2)];
         fightAudioSource.Play();
+
+        anim.SetInteger("locoMotionParam", 1);
 
         yield return new WaitForSeconds(hitTime);
         //box.activate = false;
