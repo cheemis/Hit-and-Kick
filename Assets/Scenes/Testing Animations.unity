@@ -2116,6 +2116,8 @@ MonoBehaviour:
   tvStatic: {fileID: 1798086624}
   kickTime: 1
   textmesh: {fileID: 1720938240}
+  kickHero: {fileID: 0}
+  gameOver: {fileID: 0}
   gameOverText: {fileID: 761277116}
 --- !u!4 &2082185431
 Transform:
@@ -2259,6 +2261,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4981426808800716522, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
+      propertyPath: m_TagString
+      value: ground
+      objectReference: {fileID: 0}
     - target: {fileID: 6869141716491060816, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2303,6 +2309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: In-Game World
       objectReference: {fileID: 0}
+    - target: {fileID: 7502099047853494743, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
+      propertyPath: m_TagString
+      value: ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2324,6 +2334,10 @@ PrefabInstance:
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 761277116}
+    - target: {fileID: 3422956811261220095, guid: 292128d221eba3c4d90721f1e65bdcda, type: 3}
+      propertyPath: m_MinMoveDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5537756817403368080, guid: 292128d221eba3c4d90721f1e65bdcda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
