@@ -251,6 +251,7 @@ public class Grunt : MonoBehaviour
 
     private void Dying()
     {
+        anim.SetInteger("locoMotionState", 2);
         if (Time.time > deathTime)
         {
             Destroy(this.gameObject);
