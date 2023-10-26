@@ -447,10 +447,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 573866627294864374, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 573866627294864374, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1391027521713667548, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 584870872}
+    - target: {fileID: 1960273787366021803, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925709244947827904, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.79
+      objectReference: {fileID: 0}
     - target: {fileID: 3754897537008564454, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
       propertyPath: textmesh
       value: 
@@ -467,9 +483,25 @@ PrefabInstance:
       propertyPath: musicManager
       value: 
       objectReference: {fileID: 3225998407264414377}
+    - target: {fileID: 3907256514007906120, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907256514007906120, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.21
+      objectReference: {fileID: 0}
     - target: {fileID: 5402646824112432109, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
       propertyPath: m_Name
       value: Managers
+      objectReference: {fileID: 0}
+    - target: {fileID: 7021004109495554977, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7021004109495554977, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.31
       objectReference: {fileID: 0}
     - target: {fileID: 8844839866622633706, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
       propertyPath: m_LocalPosition.x
@@ -537,6 +569,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 244140590768288905, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
       propertyPath: isGlobal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 244140590768288905, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3338107414310317813, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
