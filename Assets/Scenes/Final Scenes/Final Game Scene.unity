@@ -261,17 +261,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1720938240 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6367240512910353768, guid: cd886184c8320c841a2f86361b597fdb, type: 3}
-  m_PrefabInstance: {fileID: 9157220834960011858}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1798086624 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2179427877730473661, guid: 45f68a54a14c0624bbd2fd82883e1c45, type: 3}
@@ -470,7 +459,7 @@ PrefabInstance:
     - target: {fileID: 3754897537008564454, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
       propertyPath: textmesh
       value: 
-      objectReference: {fileID: 1720938240}
+      objectReference: {fileID: 0}
     - target: {fileID: 3754897537008564454, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
       propertyPath: tvStatic
       value: 
