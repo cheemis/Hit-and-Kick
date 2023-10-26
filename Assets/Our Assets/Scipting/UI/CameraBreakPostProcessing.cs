@@ -36,8 +36,22 @@ public class CameraBreakPostProcessing : MonoBehaviour
     private float centerYTarget = 0;
 
     //blur variables
+    [SerializeField]
+    private float unblurSpeed = .5f;
     private DepthOfField depth;
-    private Vector2 lerpRange = new Vector2(0, 10);
+    [SerializeField]
+    private Vector2 blurLerpRange = new Vector2(0, 10);
+
+    //color grading variables
+    [SerializeField]
+    private float colorSpeed = 5f;
+    private ColorGrading color;
+    [SerializeField]
+    private Vector2 colorLerpRange = new Vector2(-100, 0);
+    [SerializeField]
+    private float colorPostSpeed = 1;
+    [SerializeField]
+    private Vector2 colorPostLerpRange = new Vector2(-100, 0);
 
 
 
@@ -50,6 +64,7 @@ public class CameraBreakPostProcessing : MonoBehaviour
         volume.profile.TryGetSettings<Grain>(out grain);
         volume.profile.TryGetSettings<LensDistortion>(out lens);
         volume.profile.TryGetSettings<DepthOfField>(out depth);
+        volume.profile.TryGetSettings<ColorGrading>(out color);
 
         //make screen clean
         StopDistortingScreen();
@@ -85,8 +100,20 @@ public class CameraBreakPostProcessing : MonoBehaviour
         grain.active = true;
         lens.active = true;
         depth.active = true;
+        color.active = true;
 
-        depth.focusDistance.value = lerpRange.x;
+        depth.focusDistance.value = blurLerpRange.x;
+
+        //randomcolor shifting
+        colorLerpRange.x *= Random.Range(0,100) < 50 ? 1 : -1;
+        color.saturation.value = colorLerpRange.x;
+
+        //contrast - testing code
+        colorLerpRange.x *= Random.Range(0, 100) < 50 ? 1 : -1;
+        color.contrast.value = colorLerpRange.x / 2;
+
+        //color post proccessing
+        color.postExposure.value = colorPostLerpRange.y;
     }
 
     private void StopDistortingScreen()
@@ -95,15 +122,8 @@ public class CameraBreakPostProcessing : MonoBehaviour
         grain.active = false;
         lens.active = false;
         depth.active = false;
+        color.active = false;
     }
-
-
-
-
-
-
-
-
 
 
     private void DistortScreen()
@@ -130,6 +150,11 @@ public class CameraBreakPostProcessing : MonoBehaviour
 
     private void UnBlurScreen()
     {
-        depth.focusDistance.value += Mathf.Lerp(lerpRange.x, lerpRange.y, Time.deltaTime);
+        depth.focusDistance.value = Mathf.Lerp(blurLerpRange.x, blurLerpRange.y, unblurSpeed * Time.deltaTime);
+
+        color.saturation.value = Mathf.Lerp(color.saturation.value, colorLerpRange.y, colorSpeed * Time.deltaTime);
+        color.contrast.value = Mathf.Lerp(color.saturation.value, colorLerpRange.y, colorSpeed * Time.deltaTime);
+
+        color.postExposure.value = Mathf.Lerp(color.postExposure, colorPostLerpRange.x, colorSpeed * Time.deltaTime);
     }
 }

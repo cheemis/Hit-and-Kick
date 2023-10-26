@@ -23,8 +23,8 @@ public class KickingManager : MonoBehaviour
 
 
     //kicking variables
-    [SerializeField]
-    private GameObject foot;
+    //[SerializeField]
+    //private GameObject foot;
     [SerializeField]
     private GameObject tvStatic;
     public float kickTime = 1f;
@@ -34,26 +34,29 @@ public class KickingManager : MonoBehaviour
     private TextMeshProUGUI textmesh;
 
     //Audio
-    [SerializeField]
+    //[SerializeField]
     private AudioSource kickHero;
-    [SerializeField]
-    private AudioSource gameOver;
+    //[SerializeField]
+    //private AudioSource gameOver;
 
 
     //other entities variables
     private LocationsManager locationsManager;
     public GameObject gameOverText; // TEMP VARIABLE
+    [SerializeField]
+    private MusicManager musicManager;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        foot.SetActive(false);
+        //foot.SetActive(false);
         tvStatic.SetActive(false);
         textmesh.text = "Kicks left: " + kicksLeft;
 
         locationsManager = GameObject.FindGameObjectWithTag("SpawningManager")?.GetComponent<LocationsManager>();
+        kickHero = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -92,7 +95,7 @@ public class KickingManager : MonoBehaviour
 
         StartCoroutine(KickingDuration());
 
-        foot.SetActive(true);
+        //foot.SetActive(true);
         tvStatic.SetActive(true);
         
     }
@@ -120,11 +123,12 @@ public class KickingManager : MonoBehaviour
         }
         else
         {
-            gameOver.Play();
+            //gameOver.Play();
+            musicManager.GameOverMusic();
             gameOverText.SetActive(true);
             
         }
 
-        foot.SetActive(false);
+        //foot.SetActive(false);
     }
 }

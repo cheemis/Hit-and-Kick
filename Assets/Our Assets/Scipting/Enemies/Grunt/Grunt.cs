@@ -266,7 +266,8 @@ public class Grunt : MonoBehaviour
         if (hurtAudio)
         {
             hurtAudio = false;
-            hurtAudioSource.clip = hurthSfx[Random.Range(0, 3)];
+            hurtAudioSource.clip = hurthSfx[Random.Range(0, hurthSfx.Length)];
+            hurtAudioSource.pitch = Random.Range(.8f, 1.1f);
             hurtAudioSource.Play();
             
         }

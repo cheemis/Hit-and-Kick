@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5169604924423834755}
   - component: {fileID: 2737067776284292085}
   - component: {fileID: 2674335152863491346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Game View Camera (Post Processing)
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
