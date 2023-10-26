@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
     public float horizontalSpeed = 10f;
     public float verticalSpeed = 5f;
 
+    private bool groundedPlayer;
+    private float jumpHeight = 1.0f;
+    private float gravityValue = -9.81f;
+    private Vector3 playerVelocity;
+
     [Space(20)]
     //audio variables
     [SerializeField]
@@ -82,11 +87,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerCanMove)
+        if (playerCanMove)
         {
             PlayerControls();
         }
-        
+
     }
 
     private void OnEnable()
@@ -121,16 +126,23 @@ public class PlayerController : MonoBehaviour
 
         //if the player is not punching, then allow them to move
         // Tom thoughts: we may need to release this constraint once we want to run-hit
-        if(!hitting && !kicking)
-        {
+        //if(!hitting && !kicking)
+        //{
             MoveHero();
             TurnHero(Input.GetKey(KeyCode.D), Input.GetKey(KeyCode.A));
-        }
+        //}
         
     }
 
     private void MoveHero()
     {
+
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
+
         float upwardSpeed = ((Input.GetKey(KeyCode.W) ? 1 : 0) +
                             (Input.GetKey(KeyCode.S) ? -1 : 0)) *
                             horizontalSpeed * Time.deltaTime;
@@ -140,6 +152,15 @@ public class PlayerController : MonoBehaviour
                                horizontalSpeed * Time.deltaTime;
         //audio 
         controller.Move(new Vector3(rightwardSpeed, 0, upwardSpeed));
+
+        if (Input.GetKeyDown(KeyCode.Space) && groundedPlayer)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            Debug.Log("jump: " + playerVelocity.y);
+        }
+
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 
     private void TurnHero(bool facingRight, bool facingLeft)
