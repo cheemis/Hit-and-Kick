@@ -14,6 +14,22 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
 
+    public enum playerState
+    {
+        none,
+        move,
+        jump,
+        hitted,
+        combo_1_1,
+        combo_1_2,
+        combo_1_3,
+        combo_2_1,
+        defeated
+    }
+
+    [SerializeField]
+    private playerState currentState = playerState.none;
+
 
     //movement variables
     private CharacterController controller;
@@ -94,6 +110,40 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    //private void CurrentPlayerState()
+    //{
+    //    switch (currentState)
+    //    {
+    //        case enemyState.none:
+    //            break;
+    //        case enemyState.walking: // the grunt is walking towards the player
+    //            GruntMovement();
+    //            break;
+    //        case enemyState.idle: //waiting after punch to begin moving
+    //            Idling();
+    //            break;
+    //        case enemyState.waitingUpToPunch: //the grunt has arrived at the player and is winding up a punch
+    //            WaitForPunch();
+    //            break;
+    //        case enemyState.punching: //the enemy is punching the player
+    //            Punching();
+    //            break;
+    //        case enemyState.gettingUp: //the enemy is getting up after the TV was kicked
+    //            break;
+    //        case enemyState.dying: //The enemy was kicked by the player
+    //            Dying();
+    //            break;
+    //        case enemyState.knockedBack: //the enemy getting pushed back
+    //            knockedBack();
+    //            break;
+    //        default:
+    //            break;
+
+
+    //    }
+
+    //}
+
     private void OnEnable()
     {
         KickingManager.onKickTV += OnKick;
@@ -110,7 +160,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            gameOver.Play();
+            //gameOver.Play();
             gameOverText.SetActive(true);
             playerCanMove = false;
         }
@@ -138,6 +188,15 @@ public class PlayerController : MonoBehaviour
     {
 
         groundedPlayer = controller.isGrounded;
+        if (groundedPlayer)
+        {
+            //if it's a pure jump, back to none
+            if (currentState == playerState.jump)
+            {
+                currentState = playerState.none;
+                anim.SetInteger("locoMotionParam", 0);
+            }
+        }
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -150,13 +209,33 @@ public class PlayerController : MonoBehaviour
         float rightwardSpeed = ((Input.GetKey(KeyCode.D) ? 1 : 0) +
                                (Input.GetKey(KeyCode.A) ? -1 : 0)) *
                                horizontalSpeed * Time.deltaTime;
-        //audio 
+
+
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal") * horizontalSpeed, 0, Input.GetAxis("Vertical") * verticalSpeed);
+       
+
+        if ((upwardSpeed != 0 || rightwardSpeed != 0) && currentState != playerState.jump && groundedPlayer)
+        {
+            //switch to move action, once we reach here, it's a valid state to move. 
+            currentState = playerState.move;
+            anim.SetInteger("locoMotionParam", 1);
+        }
+        else
+        {
+            if (currentState == playerState.move && currentState != playerState.jump && groundedPlayer)
+            {
+                currentState = playerState.none;
+                anim.SetInteger("locoMotionParam", 0);
+            }
+        }
+
         controller.Move(new Vector3(rightwardSpeed, 0, upwardSpeed));
 
-        if (Input.GetKeyDown(KeyCode.Space) && groundedPlayer)
+        if (Input.GetKey(KeyCode.Space) && groundedPlayer && (currentState == playerState.move || currentState == playerState.none))
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            Debug.Log("jump: " + playerVelocity.y);
+            currentState = playerState.jump;
+            anim.SetInteger("locoMotionParam", 2);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
@@ -251,13 +330,15 @@ public class PlayerController : MonoBehaviour
         box.hitCounter = 2;
         //box.activate = true;
         //audio
+        currentState = playerState.combo_1_1;
+        anim.SetInteger("locoMotionParam", 11);
         fightAudioSource.clip = punchSfx[Random.Range(0, 2)];
         fightAudioSource.Play();
 
-        anim.SetInteger("locoMotionParam", 1);
-
         yield return new WaitForSeconds(hitTime);
         //box.activate = false;
+        currentState = playerState.none;
+        anim.SetInteger("locoMotionParam", 0);
         hurtBox.SetActive(false);
         hitting = false;
         actioned = false;
@@ -291,7 +372,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector3 oldPosition = hurtBox.transform.localPosition;
-        hurtBox.transform.localPosition = new Vector3(1.573f, -0.5f, 0);  //hardcode
+        //hurtBox.transform.localPosition = new Vector3(1.573f, -0.5f, 0);  //hardcode
         hurtBox.SetActive(true);
         HurtBox box = hurtBox.GetComponent<HurtBox>();
         box.hitCounter = 2;
