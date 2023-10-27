@@ -35,7 +35,10 @@ public class PlayerController : MonoBehaviour
     private AudioSource kickComputer;
     [SerializeField]
     private AudioSource gameOver;
-
+    [SerializeField]
+    private AudioClip[] footStepSfx;
+    [SerializeField]
+    private AudioSource footStep;
     public enum playerAction
     {
         noAction,
@@ -262,7 +265,14 @@ public class PlayerController : MonoBehaviour
         hitting = false;
         actioned = false;
     }
-
+    /// <summary>
+    /// foostepsound
+    /// </summary>
+    public void PlayFootstepSound()
+    {
+        footStep.clip = footStepSfx[Random.Range(0, footStepSfx.Length)];
+        footStep.Play();
+    }
     IEnumerator KickingDuration()
     {
         actioned = true;
@@ -317,4 +327,5 @@ public class PlayerController : MonoBehaviour
         kicking = false;
         actioned = false;
     }
+   
 }
