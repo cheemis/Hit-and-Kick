@@ -504,6 +504,7 @@ MonoBehaviour:
   hurtBox: {fileID: 7390051495255776028}
   invincibility: 1
   gameOverText: {fileID: 0}
+  legAnim: {fileID: 0}
 --- !u!54 &1040901266201077362
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -744,7 +745,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -4509869297036661506, guid: ee698b9f2ca9e5f439a6f624ab54f7be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
