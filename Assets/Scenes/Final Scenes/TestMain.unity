@@ -1100,8 +1100,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -620}
-  m_SizeDelta: {x: 500, y: 850}
+  m_AnchoredPosition: {x: 0, y: 137}
+  m_SizeDelta: {x: 500, y: 1650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &345659791
 MonoBehaviour:
@@ -1123,11 +1123,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A Kicker Ocean!\n\nA game by\nNicholas Nolasco\nHu Bo\nZongheng Cao\nDazheng
-    Zhu\nLixiao Tian\n\nLevel Designer:\nNicholas Nolasco\nHu Bo\n\nProgrammers:\nNicholas
-    Nolasco\nZongheng Cao\nLixiao Tian\nDazheng Zhu\n\nArtist:          \nHu Bo\n\nAnimator:\nHu
-    Bo\n\nUI:\nNicholas Nolasco\nLixiao Tian\n\nAudio Designer:\nDazheng Zhu\n\nSounds
-    Collected By Dazheng Zhu\n\nMusic:\nKPM Library\n"
+  m_text: "A Kicker Ocean!\r\n\r\nA game by\r\nNicholas Nolasco\r\nHu Bo\r\nZongheng
+    Cao\r\nDazheng Zhu\r\nLixiao Tian\r\n\r\nLevel Designer:\r\nNicholas Nolasco\r\nHu
+    Bo\r\n\r\nProgrammers:\r\nNicholas Nolasco\r\nZongheng Cao\r\nLixiao Tian\r\nDazheng
+    Zhu\r\n\r\nArtist:          \r\nHu Bo\r\nNicholas Nolascao\n\r\nAnimator:\r\nHu
+    Bo\r\n\rLixiao Tian\r\n\nUI:\r\nNicholas Nolasco\r\nLixiao Tian\r\n\r\nAudio
+    Designer:\r\nDazheng Zhu\r\n\r\nSounds Collected\nby Dazheng Zhu\r\n\r\nMusic:\r\nKPM
+    Library\r\n\r\nPosters By:\r\nhttps://wall.alphacoders.com/\r\n\r\n3D Controller
+    By:\r\n\rEnozone\n\r\n3D Hands By:\r\nsametsylmz3d"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa33f3848d8a6a4995502fbc5debbcb, type: 2}
   m_sharedMaterial: {fileID: -2769560121350920687, guid: 8aa33f3848d8a6a4995502fbc5debbcb, type: 2}
