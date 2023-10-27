@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour
     private AudioSource fightAudioSource;
     [SerializeField]
     private AudioSource kickComputer;
-    [SerializeField]
-    private AudioSource gameOver;
+    //[SerializeField]
+    //private AudioSource gameOver;
     [SerializeField]
     private AudioClip[] footStepSfx;
     [SerializeField]
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            gameOver.Play();
+            //gameOver.Play();
             gameOverText.SetActive(true);
             playerCanMove = false;
         }
