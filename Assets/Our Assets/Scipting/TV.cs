@@ -30,7 +30,7 @@ public class TV : MonoBehaviour
     void Update()
     {
 
-        print(TVkicked);
+        //print(TVkicked);
     }
    
     void OnTriggerEnter(Collider collision)
