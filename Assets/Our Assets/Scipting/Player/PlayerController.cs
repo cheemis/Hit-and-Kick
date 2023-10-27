@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
     private AudioClip[] footStepSfx;
     [SerializeField]
     private AudioSource footStep;
+    [SerializeField]
+    private AudioSource jumpSfx;
     public enum playerAction
     {
         noAction,
@@ -238,6 +240,7 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             currentState = playerState.jump;
+            jumpSfx.Play();
             anim.SetInteger("locoMotionParam", 2);
         }
 
