@@ -6,28 +6,28 @@ public class TVanimation : MonoBehaviour
 {
     public GameObject Television;
     public AnimationClip TV;
-    Animator anim;
+    Animation anim;
+    public bool kicked;
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponent<Animation>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-    }
-    void OnTriggerEnter(Collider collision)
-    {
-        //If got kicked
-
-        bool kicked = Television.GetComponent<TV>().isKicked;
+        //kicked = true;
+        kicked = Television.GetComponent<TV>().TVkicked;
+        //print(kicked);
         if (kicked == true)
         {
-            anim.Play("TV");
+            anim.clip = TV;
+            anim.Play();
+            kicked = false;
+          
         }
-            
         
     }
+
 }
