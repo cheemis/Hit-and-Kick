@@ -27,14 +27,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5182599666281121232}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.41080496, y: -0.028472822, z: -0.012747887, w: -0.9111894}
-  m_LocalPosition: {x: 1.0800018, y: 1.309, z: -1.349}
+  m_LocalRotation: {x: 0.40896267, y: -0.048176255, z: -0.056509465, w: -0.9095248}
+  m_LocalPosition: {x: 1.095, y: 1.306, z: -1.346}
   m_LocalScale: {x: 0.70832, y: 0.70832, z: 0.70831996}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4756711792072176464}
   m_Father: {fileID: 5438937211932071306}
-  m_LocalEulerAnglesHint: {x: -84.45351, y: 3.686601, z: -0.11264764}
+  m_LocalEulerAnglesHint: {x: -48.536, y: 3.586, z: 5.493}
 --- !u!33 &5918169883582668726
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -135,14 +135,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6924380393625749574}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.41080496, y: -0.028472822, z: -0.012747887, w: -0.9111894}
-  m_LocalPosition: {x: -1.284, y: 1.309, z: -1.201}
+  m_LocalRotation: {x: 0.4117757, y: -0.003491044, z: 0.04257026, w: -0.9102837}
+  m_LocalPosition: {x: -1.248, y: 1.306, z: -1.2}
   m_LocalScale: {x: 0.70832, y: 0.70832, z: 0.70831996}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4446724877442678912}
   m_Father: {fileID: 5438937211932071306}
-  m_LocalEulerAnglesHint: {x: -48.536, y: 3.586, z: -0.014}
+  m_LocalEulerAnglesHint: {x: -48.536, y: 3.586, z: -6.972}
 --- !u!33 &6113402462849787330
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5438937211932071306}
-  - component: {fileID: 803005596937402182}
+  - component: {fileID: 483245540206201018}
   m_Layer: 0
   m_Name: Legs
   m_TagString: Leg
@@ -250,7 +250,7 @@ Transform:
   - {fileID: 7688327938153375940}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &803005596937402182
+--- !u!95 &483245540206201018
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
