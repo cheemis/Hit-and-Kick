@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerCanMove)
+        if (playerCanMove && !KickingManager.gameOver)
         {
             PlayerControls();
         }

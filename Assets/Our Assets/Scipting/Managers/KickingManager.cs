@@ -12,7 +12,8 @@ public class KickingManager : MonoBehaviour
     private bool kicking = false;
     private int kicksLeft = 5;
 
-
+    //global variables
+    public static bool gameOver = false;
 
     //event variables
     public delegate void OnKickTV();
@@ -21,17 +22,14 @@ public class KickingManager : MonoBehaviour
     public delegate void OnRecoverFromKick();
     public static OnRecoverFromKick onRecoverFromKick;
 
-
     //kicking variables
-    //[SerializeField]
-    //private GameObject foot;
     [SerializeField]
     private GameObject tvStatic;
     public float kickTime = 1f;
 
     //UI variables
-    [SerializeField]
-    private TextMeshProUGUI textmesh;
+    //[SerializeField]
+    //private TextMeshProUGUI textmesh;
 
     //Audio
     //[SerializeField]
@@ -53,16 +51,17 @@ public class KickingManager : MonoBehaviour
     {
         //foot.SetActive(false);
         tvStatic.SetActive(false);
-        textmesh.text = "Kicks left: " + kicksLeft;
 
         locationsManager = GameObject.FindGameObjectWithTag("SpawningManager")?.GetComponent<LocationsManager>();
         kickHero = GetComponent<AudioSource>();
+
+        gameOver = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!kicking && Input.GetKeyDown(KeyCode.K))
+        if(!gameOver && !kicking && Input.GetKeyDown(KeyCode.K))
         {
 
             locationsManager.ResetLocations();
@@ -105,14 +104,12 @@ public class KickingManager : MonoBehaviour
         kicking = false;
 
         kicksLeft--;
-        textmesh.text = "Kicks left: " + kicksLeft;
     }
 
     IEnumerator KickingDuration()
     {
         kicking = true;
         yield return new WaitForSeconds(kickTime);
-
 
 
         if(kicksLeft > 0)
