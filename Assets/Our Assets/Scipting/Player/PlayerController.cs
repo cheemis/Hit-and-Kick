@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(Input.GetAxis("Horizontal") * horizontalSpeed, 0, Input.GetAxis("Vertical") * verticalSpeed);
        
 
-        if ((upwardSpeed != 0 || rightwardSpeed != 0) && currentState != playerState.jump && groundedPlayer)
+        if ((upwardSpeed != 0 || rightwardSpeed != 0) && currentState == playerState.none && groundedPlayer)
         {
             //switch to move action, once we reach here, it's a valid state to move. 
             currentState = playerState.move;
@@ -402,8 +402,14 @@ public class PlayerController : MonoBehaviour
             fightAudioSource.Play();
         }
 
+        currentState = playerState.combo_1_2;
+        anim.SetInteger("locoMotionParam", 12);
+
 
         yield return new WaitForSeconds(kickTime);
+
+        currentState = playerState.none;
+        anim.SetInteger("locoMotionParam", 0);
         //box.activate = false;
         hurtBox.SetActive(false);
         hurtBox.transform.localPosition = oldPosition;
