@@ -43,6 +43,8 @@ public class KickingManager : MonoBehaviour
     public GameObject gameOverText; // TEMP VARIABLE
     [SerializeField]
     private MusicManager musicManager;
+    [SerializeField]
+    private ScoreBoard scoreBoard;
 
     public Animator leg;
 
@@ -71,9 +73,12 @@ public class KickingManager : MonoBehaviour
             StartCoroutine(WaitforKick());
         }
 
-        if(Input.GetKeyDown(KeyCode.R))
+        else if (gameOver)
         {
-            SceneManager.LoadSceneAsync(0);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadSceneAsync(0);
+            }
         }
     }
 
@@ -122,13 +127,29 @@ public class KickingManager : MonoBehaviour
         }
         else
         {
-            //gameOver.Play();
-            musicManager.GameOverMusic();
-            gameOverText.SetActive(true);
-            
+            EndGame();
         }
 
         //foot.SetActive(false);
+    }
+
+    public void EndGame()
+    {
+        gameOver = true;
+        musicManager.GameOverMusic();
+        gameOverText.SetActive(true);
+        if (scoreBoard != null)
+        {
+            string gameOverString = //send help
+                "Game Over" +
+                "\r\n" +
+                "<color=white>Score: </color><color=green>" + scoreBoard.currentScore + "</color>" +
+                "\r\n" +
+                "<size=42>Press 'R' to restart\r\n</size>";
+
+
+            gameOverText.GetComponent<TextMeshProUGUI>().text = gameOverString;
+        }
     }
     IEnumerator WaitforKick()
     {

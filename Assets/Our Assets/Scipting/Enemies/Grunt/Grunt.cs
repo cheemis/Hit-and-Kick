@@ -251,6 +251,7 @@ public class Grunt : MonoBehaviour
         anim.SetInteger("locoMotionState", 2);
         if (Time.time > deathTime)
         {
+            GameObject.FindGameObjectWithTag("ScoreBoard").GetComponent<ScoreBoard>().UpdateScore();
             Destroy(this.gameObject);
         }
     }

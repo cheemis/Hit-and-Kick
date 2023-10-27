@@ -57,10 +57,6 @@ public class PlayerController : MonoBehaviour
     private AudioSource footStep;
     [SerializeField]
     private AudioSource jumpSfx;
-    [SerializeField]
-    private AudioClip[] hurtSfx;
-    [SerializeField]
-    private AudioSource hurtAudioSource;
     public enum playerAction
     {
         noAction,
@@ -105,6 +101,8 @@ public class PlayerController : MonoBehaviour
     public GameObject gameOverText; // TEMP VARIABLE
     [SerializeField]
     private Animator legAnim;
+    [SerializeField]
+    private KickingManager kickingManager;
 
 
     // Start is called before the first frame update
@@ -146,7 +144,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-           
             TakeDamage();
         }
     }
@@ -294,21 +291,19 @@ public class PlayerController : MonoBehaviour
     {
         if(invincibilityTime < Time.time) //if can take damage
         {
-           
             SetHealth(lives - 1);
 
             if(lives <= 0)
             {
-                gameOverText.SetActive(true);
+                if (kickingManager != null) { kickingManager.EndGame(); }
+                else { gameOverText.SetActive(true); }
+
                 currentState = playerState.defeated;
                 anim.SetInteger("locoMotionParam", 3);
                 playerCanMove = false;
-                KickingManager.gameOver = true;
             }
             else
             {
-                hurtAudioSource.clip = hurtSfx[Random.Range(0, hurtSfx.Length)];
-                hurtAudioSource.Play();
                 invincibilityTime = Time.time + invincibility;
                 anim.SetTrigger("takeDamage"); //is the same length as invincibility: 1 second
             }
@@ -318,7 +313,6 @@ public class PlayerController : MonoBehaviour
 
     private void SetHealth(int newHealth)
     {
-        
         lives = newHealth;
 
         if (legAnim != null) { legAnim.SetInteger("lives", newHealth); }

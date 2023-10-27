@@ -231,6 +231,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7040151154164246979, guid: cd886184c8320c841a2f86361b597fdb, type: 3}
   m_PrefabInstance: {fileID: 9157220834960011858}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1308855291 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3754897537008564454, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
+  m_PrefabInstance: {fileID: 3225998407264414376}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c5eea16fce681d4c8bb6039fc3ed8b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1633490515
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +583,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1798086624}
     - target: {fileID: 3754897537008564454, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
+      propertyPath: scoreBoard
+      value: 
+      objectReference: {fileID: 5575592745596825332}
+    - target: {fileID: 3754897537008564454, guid: 08c915fdf3b8bd64d8a42e76fde6bd58, type: 3}
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 761277116}
@@ -732,6 +747,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
+--- !u!114 &5575592745596825332 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1557827947310386598, guid: f3f13be2a60fa284490c614170fdc01e, type: 3}
+  m_PrefabInstance: {fileID: 5575592745596825331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d359fa3cddb18164584d5cb4ad5f4fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5681365880035504088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -752,6 +778,10 @@ PrefabInstance:
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 761277116}
+    - target: {fileID: 936519354715188153, guid: 292128d221eba3c4d90721f1e65bdcda, type: 3}
+      propertyPath: kickingManager
+      value: 
+      objectReference: {fileID: 1308855291}
     - target: {fileID: 5537756817403368080, guid: 292128d221eba3c4d90721f1e65bdcda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
