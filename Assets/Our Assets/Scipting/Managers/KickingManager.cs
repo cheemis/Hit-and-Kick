@@ -44,6 +44,8 @@ public class KickingManager : MonoBehaviour
     [SerializeField]
     private MusicManager musicManager;
 
+    public Animator leg;
+
 
 
     // Start is called before the first frame update
@@ -63,10 +65,10 @@ public class KickingManager : MonoBehaviour
     {
         if(!gameOver && !kicking && Input.GetKeyDown(KeyCode.K))
         {
-
+            kicking = true;
             locationsManager.ResetLocations();
-            onKickTV.Invoke();
-            kickHero.Play();
+            leg.SetTrigger("kick");
+            StartCoroutine(WaitforKick());
         }
 
         if(Input.GetKeyDown(KeyCode.R))
@@ -127,5 +129,11 @@ public class KickingManager : MonoBehaviour
         }
 
         //foot.SetActive(false);
+    }
+    IEnumerator WaitforKick()
+    {
+        yield return new WaitForSeconds(kickTime);
+        onKickTV.Invoke();
+        kickHero.Play();
     }
 }

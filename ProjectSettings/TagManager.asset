@@ -10,6 +10,9 @@ TagManager:
   - EnemyBody
   - InGameCamera
   - ground
+  - Leg
+  - Crack
+  - Cube
   layers:
   - Default
   - TransparentFX
