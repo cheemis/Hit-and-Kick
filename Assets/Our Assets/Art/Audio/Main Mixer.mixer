@@ -28,6 +28,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &-7373962039641663409
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerFootStep
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: d649f282d3b4fd940b6c0acdfc966cde
+  m_Children: []
+  m_Volume: e326045765a3d7440aa26a1e838e27f6
+  m_Pitch: 07ead4c1855fd584e81b6f33bc16adfa
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 2781027401864445228}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &-7002123647086568496
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -299,6 +318,7 @@ AudioMixerController:
     - 9147cd45d6c806f4cbad5fcf6b973dec
     - 072600947d64d6c46b7b5d029c30af7b
     - 38fef9261e4368c4c902bb7e0bb30dda
+    - d649f282d3b4fd940b6c0acdfc966cde
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -353,6 +373,7 @@ AudioMixerSnapshotController:
     5a4e4a923bfa65c4a82404746d03b479: 0.1
     4e3a3fe3a66f14242acf5b272b37a78f: 0.8772599
     dbeacc857d4f3b641a63f34420a2b421: -4
+    e326045765a3d7440aa26a1e838e27f6: -7.436929
     db2bac7726aa9c24381bdc6830ada786: 1.4306194
     7522d6873c2c9d448a403cb5a7bbc240: 0
     5a0649b793e602946af68d767ee90e7f: 22000
@@ -391,6 +412,20 @@ AudioMixerEffectController:
   m_EffectID: 882a6f2e498f70a45b254464309c5835
   m_EffectName: Attenuation
   m_MixLevel: 84a65cd188f4a3643a2be61d54934387
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &2781027401864445228
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 125d166cc78d0874dbd59633fe052b97
+  m_EffectName: Attenuation
+  m_MixLevel: a3b92c52acfd076469d9085e34eebaed
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
@@ -575,6 +610,7 @@ AudioMixerGroupController:
   - {fileID: -6317109162421975304}
   - {fileID: 2787402089860394955}
   - {fileID: -3477763831925346307}
+  - {fileID: -7373962039641663409}
   m_Volume: f407b5297d37c9941ac6b6fcf72f8dc2
   m_Pitch: 1349650adf7dcab4fa39f714d3ae4e05
   m_Send: 00000000000000000000000000000000
