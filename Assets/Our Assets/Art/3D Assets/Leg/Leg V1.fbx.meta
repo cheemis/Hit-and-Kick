@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Glow
+    second: {fileID: 2100000, guid: 73617515831e8ec46bae48495e27658b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Pants Material
     second: {fileID: 2100000, guid: c0151ac7984ea7f4793862277a8f64ff, type: 2}
   materials:
