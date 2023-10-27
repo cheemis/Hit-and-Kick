@@ -1123,14 +1123,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A Kicker Ocean!\r\n\r\nA game by\r\nNicholas Nolasco\r\nHu Bo\r\nZongheng
-    Cao\r\nDazheng Zhu\r\nLixiao Tian\r\n\r\nLevel Designer:\r\nNicholas Nolasco\r\nHu
-    Bo\r\n\r\nProgrammers:\r\nNicholas Nolasco\r\nZongheng Cao\r\nLixiao Tian\r\nDazheng
-    Zhu\r\n\r\nArtist:          \r\nHu Bo\r\nNicholas Nolascao\n\r\nAnimator:\r\nHu
-    Bo\r\n\rLixiao Tian\r\n\nUI:\r\nNicholas Nolasco\r\nLixiao Tian\r\n\r\nAudio
-    Designer:\r\nDazheng Zhu\r\n\r\nSounds Collected\nby Dazheng Zhu\r\n\r\nMusic:\r\nKPM
-    Library\r\n\r\nPosters By:\r\nhttps://wall.alphacoders.com/\r\n\r\n3D Controller
-    By:\r\n\rEnozone\n\r\n3D Hands By:\r\nsametsylmz3d"
+  m_text: "A Kicker Ocean!\r\n\r\nA game by\r\nNicholas Nolasco\r\nBo Hu\nZongheng
+    Cao\r\nDazheng Zhu\r\nLixiao Tian\r\n\r\nLevel Designer:\r\nNicholas Nolasco\r\nBo
+    Hu\n\r\nProgrammers:\r\nNicholas Nolasco\r\nZongheng Cao\r\nLixiao Tian\r\nDazheng
+    Zhu\r\n\r\nArtist:          \r\nBo Hu\nNicholas Nolascao\n\r\nAnimator:\r\nBo
+    Hu\n\rLixiao Tian\r\n\nUI:\r\nNicholas Nolasco\r\nLixiao Tian\r\n\r\nAudio Designer:\r\nDazheng
+    Zhu\r\n\r\nSounds Collected\nby Dazheng Zhu\r\n\r\nMusic:\r\nKPM Library\r\n\r\nPosters
+    By:\r\nhttps://wall.alphacoders.com/\r\n\r\n3D Controller By:\r\n\rEnozone\n\r\n3D
+    Hands By:\r\nsametsylmz3d"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8aa33f3848d8a6a4995502fbc5debbcb, type: 2}
   m_sharedMaterial: {fileID: -2769560121350920687, guid: 8aa33f3848d8a6a4995502fbc5debbcb, type: 2}
