@@ -2112,13 +2112,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5eea16fce681d4c8bb6039fc3ed8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foot: {fileID: 1178636790}
   tvStatic: {fileID: 1798086624}
   kickTime: 1
-  textmesh: {fileID: 1720938240}
-  kickHero: {fileID: 0}
-  gameOver: {fileID: 0}
   gameOverText: {fileID: 761277116}
+  musicManager: {fileID: 0}
+  leg: {fileID: 0}
 --- !u!4 &2082185431
 Transform:
   m_ObjectHideFlags: 0
@@ -2327,8 +2325,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 936519354715188153, guid: 292128d221eba3c4d90721f1e65bdcda, type: 3}
+      propertyPath: hitTime
+      value: 0.241
+      objectReference: {fileID: 0}
+    - target: {fileID: 936519354715188153, guid: 292128d221eba3c4d90721f1e65bdcda, type: 3}
       propertyPath: kickTime
-      value: 0.25
+      value: 0.275
       objectReference: {fileID: 0}
     - target: {fileID: 936519354715188153, guid: 292128d221eba3c4d90721f1e65bdcda, type: 3}
       propertyPath: gameOverText
