@@ -50,6 +50,7 @@ public class Console : MonoBehaviour
                 xr = i;
             }
 
+
         }
         transform.localEulerAngles = new Vector3(xr, 180, z);
         transform.localPosition = new Vector3(x,2 ,-2.3f);
