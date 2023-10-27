@@ -14,6 +14,22 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
 
+    public enum playerState
+    {
+        none,
+        move,
+        jump,
+        hitted,
+        combo_1_1,
+        combo_1_2,
+        combo_1_3,
+        combo_2_1,
+        defeated
+    }
+
+    [SerializeField]
+    private playerState currentState = playerState.none;
+
 
     //movement variables
     private CharacterController controller;
@@ -21,7 +37,7 @@ public class PlayerController : MonoBehaviour
     public float verticalSpeed = 5f;
 
     private bool groundedPlayer;
-    private float jumpHeight = 1.0f;
+    private float jumpHeight = 0.5f;
     private float gravityValue = -9.81f;
     private Vector3 playerVelocity;
 
@@ -33,9 +49,14 @@ public class PlayerController : MonoBehaviour
     private AudioSource fightAudioSource;
     [SerializeField]
     private AudioSource kickComputer;
+    //[SerializeField]
+    //private AudioSource gameOver;
     [SerializeField]
-    private AudioSource gameOver;
-
+    private AudioClip[] footStepSfx;
+    [SerializeField]
+    private AudioSource footStep;
+    [SerializeField]
+    private AudioSource jumpSfx;
     public enum playerAction
     {
         noAction,
@@ -94,6 +115,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
     private void OnEnable()
     {
         KickingManager.onKickTV += OnKick;
@@ -110,8 +132,10 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            gameOver.Play();
+            //gameOver.Play();
             gameOverText.SetActive(true);
+            currentState = playerState.defeated;
+            anim.SetInteger("locoMotionParam", 3);
             playerCanMove = false;
         }
     }
@@ -138,6 +162,15 @@ public class PlayerController : MonoBehaviour
     {
 
         groundedPlayer = controller.isGrounded;
+        if (groundedPlayer)
+        {
+            //if it's a pure jump, back to none
+            if (currentState == playerState.jump)
+            {
+                currentState = playerState.none;
+                anim.SetInteger("locoMotionParam", 0);
+            }
+        }
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -150,13 +183,31 @@ public class PlayerController : MonoBehaviour
         float rightwardSpeed = ((Input.GetKey(KeyCode.D) ? 1 : 0) +
                                (Input.GetKey(KeyCode.A) ? -1 : 0)) *
                                horizontalSpeed * Time.deltaTime;
-        //audio 
+       
+
+        if ((upwardSpeed != 0 || rightwardSpeed != 0) && currentState == playerState.none && groundedPlayer)
+        {
+            //switch to move action, once we reach here, it's a valid state to move. 
+            currentState = playerState.move;
+            anim.SetInteger("locoMotionParam", 1);
+        }
+        else
+        {
+            if (currentState == playerState.move && currentState != playerState.jump && groundedPlayer)
+            {
+                currentState = playerState.none;
+                anim.SetInteger("locoMotionParam", 0);
+            }
+        }
+
         controller.Move(new Vector3(rightwardSpeed, 0, upwardSpeed));
 
-        if (Input.GetKeyDown(KeyCode.Space) && groundedPlayer)
+        if (Input.GetKey(KeyCode.Space) && groundedPlayer && (currentState == playerState.move || currentState == playerState.none))
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            Debug.Log("jump: " + playerVelocity.y);
+            currentState = playerState.jump;
+            jumpSfx.Play();
+            anim.SetInteger("locoMotionParam", 2);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
@@ -190,6 +241,11 @@ public class PlayerController : MonoBehaviour
     private void Kick()
     {
         if (actioned)
+        {
+            return;
+        }
+        //don't allow jump kick
+        if (currentState == playerState.jump)
         {
             return;
         }
@@ -254,15 +310,37 @@ public class PlayerController : MonoBehaviour
         fightAudioSource.clip = punchSfx[Random.Range(0, 2)];
         fightAudioSource.Play();
 
-        anim.SetInteger("locoMotionParam", 1);
-
-        yield return new WaitForSeconds(hitTime);
+        //check if is jumping hit
+        if (currentState == playerState.jump)
+        {
+            currentState = playerState.combo_2_1;
+            anim.SetInteger("locoMotionParam", 14);
+            yield return new WaitForSeconds(0.233f);
+        }
+        else
+        {
+            currentState = playerState.combo_1_1;
+            anim.SetInteger("locoMotionParam", 11);
+            yield return new WaitForSeconds(hitTime);
+        }
+        
+        
+        
         //box.activate = false;
+        currentState = playerState.none;
+        anim.SetInteger("locoMotionParam", 0);
         hurtBox.SetActive(false);
         hitting = false;
         actioned = false;
     }
-
+    /// <summary>
+    /// foostepsound
+    /// </summary>
+    public void PlayFootstepSound()
+    {
+        footStep.clip = footStepSfx[Random.Range(0, footStepSfx.Length)];
+        footStep.Play();
+    }
     IEnumerator KickingDuration()
     {
         actioned = true;
@@ -291,7 +369,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector3 oldPosition = hurtBox.transform.localPosition;
-        hurtBox.transform.localPosition = new Vector3(1.573f, -0.5f, 0);  //hardcode
+        //hurtBox.transform.localPosition = new Vector3(1.573f, -0.5f, 0);  //hardcode
         hurtBox.SetActive(true);
         HurtBox box = hurtBox.GetComponent<HurtBox>();
         box.hitCounter = 2;
@@ -301,15 +379,24 @@ public class PlayerController : MonoBehaviour
         {
             fightAudioSource.clip = punchSfx[Random.Range(6, 8)];
             fightAudioSource.Play();
+            currentState = playerState.combo_1_3;
+            anim.SetInteger("locoMotionParam", 13);
         }
         else
         {
             fightAudioSource.clip = punchSfx[Random.Range(3, 5)];
             fightAudioSource.Play();
+            currentState = playerState.combo_1_2;
+            anim.SetInteger("locoMotionParam", 12);
         }
+
+       
 
 
         yield return new WaitForSeconds(kickTime);
+
+        currentState = playerState.none;
+        anim.SetInteger("locoMotionParam", 0);
         //box.activate = false;
         hurtBox.SetActive(false);
         hurtBox.transform.localPosition = oldPosition;
@@ -317,4 +404,5 @@ public class PlayerController : MonoBehaviour
         kicking = false;
         actioned = false;
     }
+   
 }
