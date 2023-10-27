@@ -23,17 +23,17 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -620
+        value: -837.69
         inSlope: 0
-        outSlope: 19.916666
+        outSlope: 27.934835
         tangentMode: 69
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 60
-        value: 575
-        inSlope: 19.916666
+        value: 838.4
+        inSlope: 27.934835
         outSlope: 0
         tangentMode: 69
         weightedMode: 0
@@ -92,17 +92,17 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -620
+        value: -837.69
         inSlope: 0
-        outSlope: 19.916666
+        outSlope: 27.934835
         tangentMode: 69
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 60
-        value: 575
-        inSlope: 19.916666
+        value: 838.4
+        inSlope: 27.934835
         outSlope: 0
         tangentMode: 69
         weightedMode: 0

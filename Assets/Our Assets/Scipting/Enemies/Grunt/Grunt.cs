@@ -175,18 +175,17 @@ public class Grunt : MonoBehaviour
                 break;
             default:
                 break;
-
-
         }
-
     }
     
 
     private void GruntMovement()
     {
+        if (KickingManager.gameOver) return; //base case in case game is over
+
         //find the direction to move the enemy
         Vector3 target = standingTarget.position - transform.position;
-        target.y = 0;
+        target.y = standingTarget.position.y - transform.position.y; //in case they move on the y-axis
         target.Normalize();
         controller.Move(target * chaseSpeed *Time.deltaTime);
 
@@ -244,8 +243,6 @@ public class Grunt : MonoBehaviour
         {
             currentState = enemyState.walking;
             standingTarget = playerTargetParent.GetChild(Random.Range(0, playerTargetParent.childCount)); //switch to random target location
-
-
         }
     }
 
