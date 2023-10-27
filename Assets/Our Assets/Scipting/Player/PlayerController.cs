@@ -99,6 +99,8 @@ public class PlayerController : MonoBehaviour
     //other entities variables
     private LocationsManager locationsManager;
     public GameObject gameOverText; // TEMP VARIABLE
+    [SerializeField]
+    private Animator legAnim;
 
 
     // Start is called before the first frame update
@@ -310,7 +312,9 @@ public class PlayerController : MonoBehaviour
     {
         lives = newHealth;
 
-        for(int i = 0; i < livesContainer.childCount; i++)
+        if (legAnim != null) { legAnim.SetInteger("lives", newHealth); }
+
+        for (int i = 0; i < livesContainer.childCount; i++)
         {
             bool lifeState = i < lives;
             livesContainer.GetChild(i).gameObject.SetActive(lifeState);

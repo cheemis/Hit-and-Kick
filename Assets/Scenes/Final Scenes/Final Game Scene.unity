@@ -713,6 +713,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 936519354715188153, guid: 292128d221eba3c4d90721f1e65bdcda, type: 3}
+      propertyPath: legAnim
+      value: 
+      objectReference: {fileID: 2083064395}
+    - target: {fileID: 936519354715188153, guid: 292128d221eba3c4d90721f1e65bdcda, type: 3}
       propertyPath: gameOver
       value: 
       objectReference: {fileID: 1633490516}
