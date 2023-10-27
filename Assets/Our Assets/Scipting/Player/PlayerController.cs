@@ -87,7 +87,12 @@ public class PlayerController : MonoBehaviour
     private GameObject hurtBox;
 
 
-    //animation variables
+    //health variables
+    [SerializeField]
+    private float invincibility = 1;
+    private float invincibilityTime = 0;
+    private Transform livesContainer;
+    private int lives;
 
 
 
@@ -103,6 +108,9 @@ public class PlayerController : MonoBehaviour
         hurtBox.SetActive(false);
         anim = GetComponent<Animator>();
         locationsManager = GameObject.FindGameObjectWithTag("SpawningManager")?.GetComponent<LocationsManager>();
+
+        livesContainer = GameObject.FindGameObjectWithTag("LivesContainer").transform;
+        lives = livesContainer.childCount;
     }
 
     // Update is called once per frame
@@ -132,11 +140,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            //gameOver.Play();
-            gameOverText.SetActive(true);
-            currentState = playerState.defeated;
-            anim.SetInteger("locoMotionParam", 3);
-            playerCanMove = false;
+            TakeDamage();
         }
     }
 
@@ -268,6 +272,9 @@ public class PlayerController : MonoBehaviour
         kickComputer.Play();
         //stop player from moving
         playerCanMove = false;
+
+        //reset health
+        SetHealth(livesContainer.childCount);
     }
 
     private void OnRecoverFromKick()
@@ -275,6 +282,40 @@ public class PlayerController : MonoBehaviour
         playerCanMove = true;
     }
 
+    //this method takes damage whenever an enemy punches the player
+    private void TakeDamage()
+    {
+        if(invincibilityTime < Time.time) //if can take damage
+        {
+            SetHealth(lives - 1);
+
+            if(lives <= 0)
+            {
+                gameOverText.SetActive(true);
+                currentState = playerState.defeated;
+                anim.SetInteger("locoMotionParam", 3);
+                playerCanMove = false;
+                KickingManager.gameOver = true;
+            }
+            else
+            {
+                invincibilityTime = Time.time + invincibility;
+                anim.SetTrigger("takeDamage"); //is the same length as invincibility: 1 second
+            }
+        }
+    }
+
+
+    private void SetHealth(int newHealth)
+    {
+        lives = newHealth;
+
+        for(int i = 0; i < livesContainer.childCount; i++)
+        {
+            bool lifeState = i < lives;
+            livesContainer.GetChild(i).gameObject.SetActive(lifeState);
+        }
+    }
 
 
     IEnumerator HittingDuration()
